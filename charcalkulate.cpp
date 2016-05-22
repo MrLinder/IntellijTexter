@@ -2,6 +2,8 @@
 #include <cstring>
 using namespace std;
 
+
+
 class base
 {
 protected:	
