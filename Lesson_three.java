@@ -9,17 +9,17 @@ public class Lesson_three
 		
 		initMap(map);
 		
-		System.out.print("Ruls: You  need input number from 1 to 9 - that will be your movt");
+		System.out.print("Ruls: You  need input number from 1 to 9 - that will be your move\n");
 		drawMap(map);
 		
 		System.out.print("Choise who first (1)-you, (2)-me:  ");
 			
 		int whofirst = 0;
-		while (whofirst == 0 && whofirst !=1 || whofirst !=2 )
+		while (whofirst == 0 && (whofirst !=1 || whofirst !=2) )
 		{ 
 			whofirst = changeWhoFirst();
 						
-			if (whofirst == 0 && whofirst !=1 || whofirst !=2)
+			if (whofirst == 0 && (whofirst !=1 || whofirst !=2))
 				System.out.print("\nYou need make choice who move first 1(you) or 2(me):");
 			else
 				break;
