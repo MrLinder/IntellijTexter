@@ -9,8 +9,26 @@ public class Lesson_three
 		
 		initMap(map);
 		
+		System.out.print("Choise who first (1)-you, (2)-me:  ");
+			
+		int whofirst = 0;
+		while (whofirst == 0 && whofirst !=1 || whofirst !=2 )
+		{ 
+			whofirst = changeWhoFirst();
+						
+			if (whofirst == 0 && whofirst !=1 || whofirst !=2)
+				System.out.print("\nYou need make choice who move first 1(you) or 2(me):");
+			else
+				break;
+		};
 		
-		System.out.print(changeWhoFirst());
+		
+		
+		
+		
+		
+		
+		
 		
 		
 	}
@@ -29,12 +47,11 @@ public class Lesson_three
 	public static int changeWhoFirst()
 	{
 		int Whofirst = 0;
-		System.out.print("Choise who first (1)-you, (2)-me:  ");
 		Scanner in = new Scanner(System.in);
+		
 		if(in.hasNextInt())
 		{
 			Whofirst = in.nextInt();
-			
 			return Whofirst;
 		}
 		return Whofirst;
