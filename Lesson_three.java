@@ -9,6 +9,8 @@ public class Lesson_three
 		
 		initMap(map);
 		
+		drawMap(map);
+		
 		System.out.print("Choise who first (1)-you, (2)-me:  ");
 			
 		int whofirst = 0;
@@ -22,6 +24,14 @@ public class Lesson_three
 				break;
 		};
 		
+		if (whofirst == 1 )
+		{
+		  System.out.print("Ok! you first");
+		} 
+		else
+		{
+			System.out.print("Ok! i'm first");
+		}
 		
 		
 		
@@ -32,6 +42,28 @@ public class Lesson_three
 		
 		
 	}
+	
+	
+	public static void drawMap(char[][] map)
+	{
+		drawline();
+		for ( int i = 0; i < 3; ++i) 
+		{
+			System.out.print("| ");			
+			for ( int j = 0; j < 3; ++j) 
+			{
+				System.out.print(map[i][j] + " | ");
+			}
+			System.out.print("\n");
+		}
+		drawline();
+	}
+	
+	public static void drawline()
+	{
+		System.out.print(" -------------\n");
+	}
+	
 	
 	public static void initMap(char[][] map)
 	{
