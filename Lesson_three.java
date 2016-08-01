@@ -9,6 +9,7 @@ public class Lesson_three
 		
 		initMap(map);
 		
+		System.out.print("Ruls: You  need input number from 1 to 9 - that will be your movt");
 		drawMap(map);
 		
 		System.out.print("Choise who first (1)-you, (2)-me:  ");
