@@ -35,29 +35,30 @@ public class Lesson_three
 			if (first)
 			{
 				System.out.print("your move: ");
-							
-				moveUser = StreamCheckInput(1, 9);
-				
-				while(!chkMove(moveUser))
-				{ 
-					moveUser = StreamCheckInput(1, 9);
-				};		
-				
+								
+				if(chkDoubleMove(moveUser = StreamCheckInput(1, 9)))
+				{
+					System.out.print("Your move has already been, try again!\n");
+					first = true;
+				}
+				else
+					first = false;
 				
 				instalPos(map, moveUser, CROSS);
-								
-				
-				first = false;
-								
 			} 
 			else
 			{
 				System.out.print("i'm move: ");
-				moveUser = StreamCheckInput(1, 9);
 								
-;				instalPos(map, moveUser, ZERO);
+				if(chkDoubleMove(moveComp = StreamCheckInput(1, 9)))
+				{
+					System.out.print("It move has already been, try again!\n");
+					first = false;
+				}
+				else
+					first = true;
 				
-				first = true;
+				instalPos(map, moveComp, ZERO);
 			}
 
 			
@@ -82,16 +83,16 @@ public class Lesson_three
 		
 	}
 	
-	public static boolean chkMove(int step)
+	public static boolean chkDoubleMove(int step)
 	{
-		if (EqvilStepArr[step] != step)
+		if(EqvilStepArr[step] != step)
 		{
 			EqvilStepArr[step] = step;
-			return true;
-		} 
+			return false;
+		}
 		return true;
-	}	
-		
+	}
+
 	
 	public static boolean chkWin(char[][] map, char elem) 
 	{
@@ -180,9 +181,6 @@ public class Lesson_three
 			for ( int j = 0; j < 3; ++j) 
 				map[i][j] = Integer.toString(a++).charAt(0);
 		}
-		
-		for ( int i = 0; i < 9; ++i) 
-			EqvilStepArr[i] = 0;
 	}
 	
 	public static int getInputNumber()
