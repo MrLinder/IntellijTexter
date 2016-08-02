@@ -3,6 +3,10 @@ import java.util.Scanner;
 
 public class Lesson_three
 {
+	public static final char CROSS = 'x'; 
+	public static final char ZERO = 'o'; 	
+	public static final char EMPTY = (char)32; 
+
 	public static void main(String[] args)
 	{
 		char map[][] = new char[3][3];
@@ -14,25 +18,52 @@ public class Lesson_three
 		
 		System.out.print("Choise who first (1)-you, (2)-me:  ");
 			
-		int whofirst = 0;
-		while (whofirst == 0 && (whofirst !=1 || whofirst !=2) )
-		{ 
-			whofirst = changeWhoFirst();
-						
-			if (whofirst == 0 && (whofirst !=1 || whofirst !=2))
-				System.out.print("\nYou need make choice who move first 1(you) or 2(me):");
-			else
-				break;
-		};
+		int whofirst = StreamCheckInput(1, 2);
 		
+		boolean first = true;
 		if (whofirst == 1 )
 		{
-		  System.out.print("Ok! you first");
+			System.out.print("Ok! you first\n");
 		} 
 		else
 		{
-			System.out.print("Ok! i'm first");
+			System.out.print("Ok! i'm first\n");
+			first = false;
 		}
+				
+		cleanMap(map);
+				
+		boolean game = true;
+		int moveUser;
+		int moveComp;
+		
+		moveUser = moveComp =0;
+	
+		while (game)
+		{ 
+			if (first)
+			{
+				System.out.print("your move: ");
+				moveUser = StreamCheckInput(1, 9);
+				first = false;
+			} 
+			else
+			{
+				System.out.print("i'm move: ");
+				moveUser = StreamCheckInput(1, 9);
+				first = true;
+			}
+			
+			System.out.println(moveUser);
+						
+			drawMap(map);
+		};
+		
+		
+		
+		
+		
+		
 		
 		
 		
@@ -44,7 +75,15 @@ public class Lesson_three
 		
 	}
 	
-	
+	public static void cleanMap(char map[][])
+	{
+		for ( int i = 0; i < 3; ++i) 
+		{
+			for ( int j = 0; j < 3; ++j) 
+					map[i][j] = ' ';
+		}
+	}
+
 	public static void drawMap(char[][] map)
 	{
 		drawline();
@@ -52,9 +91,7 @@ public class Lesson_three
 		{
 			System.out.print("| ");			
 			for ( int j = 0; j < 3; ++j) 
-			{
 				System.out.print(map[i][j] + " | ");
-			}
 			System.out.print("\n");
 		}
 		drawline();
@@ -64,8 +101,7 @@ public class Lesson_three
 	{
 		System.out.print(" -------------\n");
 	}
-	
-	
+		
 	public static void initMap(char[][] map)
 	{
 		int a = 1;
@@ -77,19 +113,56 @@ public class Lesson_three
 		}
 	}
 	
-	public static int changeWhoFirst()
+	public static int getInputNumber()
 	{
-		int Whofirst = 0;
 		Scanner in = new Scanner(System.in);
 		
 		if(in.hasNextInt())
 		{
-			Whofirst = in.nextInt();
-			return Whofirst;
+			return in.nextInt();
 		}
-		return Whofirst;
+		return 0;
 	}
+	
+	public static int StreamCheckInput(int a, int b)
+	{
+		int results = 0;
+		while ( results == 0 || (results < a || results > b))
+		{ 
+			results = getInputNumber();
+						
+			if (results == 0 || (results < a || results > b))
+				System.out.print("\nYou need input number from " + a + " to " + b + ": ");
+			else
+				break;
+		};
+		return results;
+	}
+	
 }
 	
+
+
+
+
+
+
+/*int results = 0;
+		*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
   
