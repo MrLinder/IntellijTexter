@@ -45,17 +45,25 @@ public class Lesson_three
 			{
 				System.out.print("your move: ");
 				moveUser = StreamCheckInput(1, 9);
+				
+				instalPos(map, moveUser, CROSS);
+				
 				first = false;
+								
 			} 
 			else
 			{
 				System.out.print("i'm move: ");
 				moveUser = StreamCheckInput(1, 9);
+				
+				
+				testchek(map);
+				
+;				instalPos(map, moveUser, ZERO);
+				
 				first = true;
 			}
-			
-			System.out.println(moveUser);
-						
+
 			drawMap(map);
 		};
 		
@@ -66,13 +74,36 @@ public class Lesson_three
 		
 		
 		
+	
 		
-		
-		
-		
-		
-		
-		
+	}
+	
+	public static testchek(char[][] map) 
+	{
+		if(map[0][2] == CROSS && map[1][2] == CROSS && map[2][2] == CROSS)
+			System.out.print("CROSS COMPLIT!");
+	}
+	
+	
+	public static void instalPos(char[][]map, int place, char elem)
+	{
+		switch (place) 
+		{
+			case 1 : map[0][0] = elem;	break;
+			case 2 : map[0][1] = elem;	break;
+			case 3 : map[0][2] = elem;	break;
+			
+			case 4 : map[1][0] = elem;	break;
+			case 5 : map[1][1] = elem;	break;
+			case 6 : map[1][2] = elem;	break;
+			
+			case 7 : map[2][0] = elem;	break;
+			case 8 : map[2][1] = elem;	break;
+			case 9 : map[2][2] = elem;	break;
+			
+			default:
+				break;
+		}
 	}
 	
 	public static void cleanMap(char map[][])
@@ -80,7 +111,7 @@ public class Lesson_three
 		for ( int i = 0; i < 3; ++i) 
 		{
 			for ( int j = 0; j < 3; ++j) 
-					map[i][j] = ' ';
+					map[i][j] = EMPTY;
 		}
 	}
 
