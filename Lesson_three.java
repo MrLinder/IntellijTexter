@@ -6,7 +6,8 @@ public class Lesson_three
 	public static final char CROSS = 'x'; 
 	public static final char ZERO = 'o'; 	
 	public static final char EMPTY = (char)32; 
-
+	public static int EqvilStepArr[] = new int[9];
+	
 	public static void main(String[] args)
 	{
 		char map[][] = new char[3][3];
@@ -19,34 +20,32 @@ public class Lesson_three
 		System.out.print("Choise who first (1)-you, (2)-me:  ");
 			
 		int whofirst = StreamCheckInput(1, 2);
-		
-		boolean first = true;
-		if (whofirst == 1 )
-		{
-			System.out.print("Ok! you first\n");
-		} 
-		else
-		{
-			System.out.print("Ok! i'm first\n");
-			first = false;
-		}
-				
+		boolean first = chengePlayer(whofirst);
+						
 		cleanMap(map);
 				
 		boolean game = true;
 		int moveUser;
 		int moveComp;
 		
-		moveUser = moveComp =0;
+		moveUser = moveComp = 0;
 	
 		while (game)
 		{ 
 			if (first)
 			{
 				System.out.print("your move: ");
+							
 				moveUser = StreamCheckInput(1, 9);
 				
+				while(!chkMove(moveUser))
+				{ 
+					moveUser = StreamCheckInput(1, 9);
+				};		
+				
+				
 				instalPos(map, moveUser, CROSS);
+								
 				
 				first = false;
 								
@@ -62,15 +61,20 @@ public class Lesson_three
 			}
 
 			
-			chkWin(map, CROSS);
-			
 			drawMap(map);
+			
+			int countStep = 0;
+			if (chkWin(map, CROSS))
+			{
+				System.out.print("You Win!");
+				break;
+			} 
+			else if(chkWin(map, ZERO))
+			{
+				System.out.print("Comp WIN!");
+				break;
+			}
 		};
-		
-		
-		
-		
-		
 		
 		
 		
@@ -78,7 +82,18 @@ public class Lesson_three
 		
 	}
 	
-	public static void chkWin(char[][] map, char elem) 
+	public static boolean chkMove(int step)
+	{
+		if (EqvilStepArr[step] != step)
+		{
+			EqvilStepArr[step] = step;
+			return true;
+		} 
+		return true;
+	}	
+		
+	
+	public static boolean chkWin(char[][] map, char elem) 
 	{
 		if(
 			(map[0][0] == elem && map[1][0] == elem && map[2][0] == elem) || 
@@ -92,36 +107,42 @@ public class Lesson_three
 			(map[0][0] == elem && map[1][1] == elem && map[2][2] == elem) || 
 			(map[2][0] == elem && map[1][1] == elem && map[0][2] == elem) 		
 		  )
-		{
-			System.out.print("CROSS COMPLIT!");
-		}	
-			
-		
-		
-		
+		return true;
+	return false;	
 	}
-	
 	
 	public static void instalPos(char[][]map, int place, char elem)
 	{
 		switch (place) 
 		{
-			case 1 : map[0][0] = elem;	break;
-			case 2 : map[0][1] = elem;	break;
-			case 3 : map[0][2] = elem;	break;
+			case 1 : map[0][0] = (map[0][0] == EMPTY) ? elem: map[0][0]; break;
+			case 2 : map[0][1] = (map[0][1] == EMPTY) ? elem: map[0][1]; break;
+			case 3 : map[0][2] = (map[0][2] == EMPTY) ? elem: map[0][2]; break;
 			
-			case 4 : map[1][0] = elem;	break;
-			case 5 : map[1][1] = elem;	break;
-			case 6 : map[1][2] = elem;	break;
+			case 4 : map[1][0] = (map[1][0] == EMPTY) ? elem: map[1][0]; break;
+			case 5 : map[1][1] = (map[1][1] == EMPTY) ? elem: map[1][1]; break;
+			case 6 : map[1][2] = (map[1][2] == EMPTY) ? elem: map[1][2]; break;
 			
-			case 7 : map[2][0] = elem;	break;
-			case 8 : map[2][1] = elem;	break;
-			case 9 : map[2][2] = elem;	break;
+			case 7 : map[2][0] = (map[2][0] == EMPTY) ? elem: map[2][0]; break;
+			case 8 : map[2][1] = (map[2][1] == EMPTY) ? elem: map[2][1]; break;
+			case 9 : map[2][2] = (map[2][2] == EMPTY) ? elem: map[2][2]; break;
 			
 			default:
 				break;
 		}
 	}
+	
+	public static boolean chengePlayer(int who)
+	{
+		if (who == 1 )
+			System.out.print("Ok! you first\n");
+		else
+		{
+			System.out.print("Ok! i'm first\n");
+			return false;
+		}
+		return true;
+	}		
 	
 	public static void cleanMap(char map[][])
 	{
@@ -159,6 +180,9 @@ public class Lesson_three
 			for ( int j = 0; j < 3; ++j) 
 				map[i][j] = Integer.toString(a++).charAt(0);
 		}
+		
+		for ( int i = 0; i < 9; ++i) 
+			EqvilStepArr[i] = 0;
 	}
 	
 	public static int getInputNumber()
@@ -189,19 +213,6 @@ public class Lesson_three
 	
 }
 	
-
-
-
-
-
-
-/*int results = 0;
-		*/
-
-
-
-
-
 
 
 
