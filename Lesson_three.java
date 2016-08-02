@@ -55,15 +55,15 @@ public class Lesson_three
 			{
 				System.out.print("i'm move: ");
 				moveUser = StreamCheckInput(1, 9);
-				
-				
-				testchek(map);
-				
+								
 ;				instalPos(map, moveUser, ZERO);
 				
 				first = true;
 			}
 
+			
+			chkWin(map, CROSS);
+			
 			drawMap(map);
 		};
 		
@@ -78,10 +78,27 @@ public class Lesson_three
 		
 	}
 	
-	public static testchek(char[][] map) 
+	public static void chkWin(char[][] map, char elem) 
 	{
-		if(map[0][2] == CROSS && map[1][2] == CROSS && map[2][2] == CROSS)
+		if(
+			(map[0][0] == elem && map[1][0] == elem && map[2][0] == elem) || 
+			(map[0][1] == elem && map[1][1] == elem && map[2][1] == elem) ||		
+			(map[0][2] == elem && map[1][2] == elem && map[2][2] == elem) ||
+			
+			(map[0][0] == elem && map[0][1] == elem && map[0][2] == elem) || 
+			(map[1][0] == elem && map[1][1] == elem && map[1][2] == elem) ||		
+			(map[2][0] == elem && map[2][1] == elem && map[2][2] == elem) ||
+			
+			(map[0][0] == elem && map[1][1] == elem && map[2][2] == elem) || 
+			(map[2][0] == elem && map[1][1] == elem && map[0][2] == elem) 		
+		  )
+		{
 			System.out.print("CROSS COMPLIT!");
+		}	
+			
+		
+		
+		
 	}
 	
 	
