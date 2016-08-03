@@ -50,8 +50,6 @@ public class Lesson_three
 			{
 				System.out.print("i'm move: ");
 								
-					//first = true;
-																	
 					moveComp = compMoveBlock(map);
 					if (moveComp == 0)
 					{
@@ -89,7 +87,13 @@ public class Lesson_three
 				System.out.print("Comp WIN!");
 				break;
 			}
-			
+			else if (EqvilStepArr[9] == 9)
+			{
+				System.out.print("Standoff!!!");
+				break;
+			} 
+
+
 		};	
 			
 	}		
