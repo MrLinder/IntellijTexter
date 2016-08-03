@@ -10,6 +10,7 @@ public class Lesson_three
 	
 	public static void main(String[] args)
 	{
+		int countStopGame = 0;
 		char map[][] = new char[3][3];
 		
 		initMap(map);
@@ -21,7 +22,8 @@ public class Lesson_three
 			
 		int whofirst = StreamCheckInput(1, 2);
 		boolean first = chengePlayer(whofirst);
-						
+		boolean step = false; 		
+		
 		cleanMap(map);
 				
 		boolean game = true;
@@ -50,16 +52,20 @@ public class Lesson_three
 			{
 				System.out.print("i'm move: ");
 								
+				if (compMoveBlock(map) == 0)
+				{
+					Random rand = new Random();
+					moveComp = rand.nextInt(8);
+					System.out.print(" rand ");
+				} 
+				else
+				{
 					moveComp = compMoveBlock(map);
-					if (moveComp == 0)
-					{
-						Random rand = new Random();
-						moveComp = rand.nextInt(8)+1;
-					}
+					System.out.print(" block ");
+				}
+					System.out.print(moveComp+1 + "\n");
 					
-					System.out.print(moveComp + "\n");
-					
-					if(chkDoubleMove(moveComp))
+					if(chkDoubleMove(moveComp+1))
 					{
 						System.out.print("It move has already been, try again!\n");
 						first = false;
@@ -69,10 +75,10 @@ public class Lesson_three
 						first = true;
 					}	
 					
-					instalPos(map, moveComp, ZERO);			
-				}
+					instalPos(map, moveComp+1, ZERO);
+			}
 			
-			
+			moveComp = 0;
 			
 			drawMap(map);
 			
@@ -87,20 +93,10 @@ public class Lesson_three
 				System.out.print("Comp WIN!");
 				break;
 			}
-			else if (EqvilStepArr[9] == 9)
-			{
-				System.out.print("Standoff!!!");
-				break;
-			} 
-
-
-		};	
 			
+		};	
 	}		
 	
-	
-	
-
 	public static int compMoveBlock(char[][]map)
 	{
 		for ( int m = 0; m < 3; ++m) 
@@ -119,7 +115,7 @@ public class Lesson_three
 	 
 	public static int pos(int k, int c)
 	{
-		int countPos = 0; 
+		int countPos = 1; 
 		for( int i = 0; i < k; ++i) 
 		{
 			for( int j = 0; j < c; ++j) 
