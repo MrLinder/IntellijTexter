@@ -1,12 +1,12 @@
-
+import java.util.Random;
 import java.util.Scanner;
 
 public class Lesson_three
 {
 	public static final char CROSS = 'x'; 
 	public static final char ZERO = 'o'; 	
-	public static final char EMPTY = (char)32; 
-	public static int EqvilStepArr[] = new int[9];
+	public static final char EMPTY = '_'; 
+	public static int EqvilStepArr[] = new int[10];
 	
 	public static void main(String[] args)
 	{
@@ -50,17 +50,31 @@ public class Lesson_three
 			{
 				System.out.print("i'm move: ");
 								
-				if(chkDoubleMove(moveComp = StreamCheckInput(1, 9)))
-				{
-					System.out.print("It move has already been, try again!\n");
-					first = false;
+					//first = true;
+																	
+					moveComp = compMoveBlock(map);
+					if (moveComp == 0)
+					{
+						Random rand = new Random();
+						moveComp = rand.nextInt(8)+1;
+					}
+					
+					System.out.print(moveComp + "\n");
+					
+					if(chkDoubleMove(moveComp))
+					{
+						System.out.print("It move has already been, try again!\n");
+						first = false;
+					}
+					else
+					{
+						first = true;
+					}	
+					
+					instalPos(map, moveComp, ZERO);			
 				}
-				else
-					first = true;
-				
-				instalPos(map, moveComp, ZERO);
-			}
-
+			
+			
 			
 			drawMap(map);
 			
@@ -75,12 +89,39 @@ public class Lesson_three
 				System.out.print("Comp WIN!");
 				break;
 			}
-		};
-		
-		
-		
+			
+		};	
+			
+	}		
 	
-		
+	
+	
+
+	public static int compMoveBlock(char[][]map)
+	{
+		for ( int m = 0; m < 3; ++m) 
+		{
+			if (map[m][0] == CROSS && map[m][1] == CROSS && map[m][2] == EMPTY) {	map[m][2] = ZERO; return pos(m, 2);	}
+			if (map[m][0] == CROSS && map[m][2] == CROSS && map[m][1] == EMPTY) {	map[m][1] = ZERO; return pos(m, 1);	}
+			if (map[m][1] == CROSS && map[m][2] == CROSS && map[m][0] == EMPTY) {	map[m][0] = ZERO; return pos(m, 0);	}
+			
+			if (map[0][m] == CROSS && map[1][m] == CROSS && map[2][m] == EMPTY) {	map[2][m] = ZERO; return pos(2, m);	}
+			if (map[1][m] == CROSS && map[2][m] == CROSS && map[0][m] == EMPTY) {	map[0][m] = ZERO; return pos(0, m);	}
+			if (map[0][m] == CROSS && map[2][m] == CROSS && map[1][m] == EMPTY) {	map[1][m] = ZERO; return pos(1, m);	}
+		}
+		return 0;
+	}
+	
+	 
+	public static int pos(int k, int c)
+	{
+		int countPos = 0; 
+		for( int i = 0; i < k; ++i) 
+		{
+			for( int j = 0; j < c; ++j) 
+				countPos++;
+		}
+		return countPos;
 	}
 	
 	public static boolean chkDoubleMove(int step)
@@ -93,7 +134,6 @@ public class Lesson_three
 		return true;
 	}
 
-	
 	public static boolean chkWin(char[][] map, char elem) 
 	{
 		if(
