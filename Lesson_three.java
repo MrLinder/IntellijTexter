@@ -52,17 +52,17 @@ public class Lesson_three
 			{
 				System.out.print("i'm move: ");
 								
-				if (compMoveBlock(map) == 0)
+				/*if (compMoveBlock(map) == 0)
 				{
 					Random rand = new Random();
 					moveComp = rand.nextInt(8);
 					System.out.print(" rand ");
 				} 
 				else
-				{
+				{*/
 					moveComp = compMoveBlock(map);
 					System.out.print(" block ");
-				}
+				//}
 					System.out.print(moveComp+1 + "\n");
 					
 					if(chkDoubleMove(moveComp+1))
@@ -104,7 +104,6 @@ public class Lesson_three
 			if (map[m][0] == CROSS && map[m][1] == CROSS && map[m][2] == EMPTY) {	map[m][2] = ZERO; return pos(m, 2);	}
 			if (map[m][0] == CROSS && map[m][2] == CROSS && map[m][1] == EMPTY) {	map[m][1] = ZERO; return pos(m, 1);	}
 			if (map[m][1] == CROSS && map[m][2] == CROSS && map[m][0] == EMPTY) {	map[m][0] = ZERO; return pos(m, 0);	}
-			
 			if (map[0][m] == CROSS && map[1][m] == CROSS && map[2][m] == EMPTY) {	map[2][m] = ZERO; return pos(2, m);	}
 			if (map[1][m] == CROSS && map[2][m] == CROSS && map[0][m] == EMPTY) {	map[0][m] = ZERO; return pos(0, m);	}
 			if (map[0][m] == CROSS && map[2][m] == CROSS && map[1][m] == EMPTY) {	map[1][m] = ZERO; return pos(1, m);	}
