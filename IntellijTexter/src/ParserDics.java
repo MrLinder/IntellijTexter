@@ -32,11 +32,12 @@ public class ParserDics {
 			
 			area.setText("");
 			area.append(buffer.toString());
-			area.append("\n--------------------");
-			area.append("\nStrings: " + Integer.toString(CountStrings));
-			area.append("\nSymbols: " + buffer.length());
 			
-			
+			ViewPanel.area_sys.append("\n--------------------\n");
+			ViewPanel.area_sys.append("Open file: " + src);
+			ViewPanel.area_sys.append("\nStrings: " + Integer.toString(CountStrings));
+			ViewPanel.area_sys.append("\nSymbols: " + buffer.length());
+						
 		}catch(IOException e)
 		{
 			System.out.println(e.getMessage());

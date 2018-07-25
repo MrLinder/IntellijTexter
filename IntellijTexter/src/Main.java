@@ -10,8 +10,8 @@ import javax.swing.WindowConstants;
 public class Main {
 		public static String defaultFolder = "E:\\Directory";
 	
-		public static int UserWidth = 800;
-		public static int UserHeight = 600;
+		public static int UserWidth = 1024;
+		public static int UserHeight = 720;
 				
 		public static Dimension ScreenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		public static int ScreenHeight = ScreenSize.height;
@@ -30,7 +30,7 @@ public class Main {
 
 /*--------------------задача-------------
  * 1.  Понять что файл файл именно файл словаря
- * синтаксис  "слово=значение \n"
+ * синтаксис  "слово= значение \n"
  * 
  * 
  * 

@@ -13,7 +13,6 @@ public class Choosefile
 		choose.setDialogTitle(title);
 		choose.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 		int choice = choose.showOpenDialog(button);
-			
 		
 			if(choice == JFileChooser.APPROVE_OPTION)
 			{
@@ -26,8 +25,9 @@ public class Choosefile
 			}
 			if(choice == JFileChooser.CANCEL_OPTION)
 			{
-				JOptionPane.showMessageDialog(null, "chose", "chois", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Заглушка", "доделать", JOptionPane.ERROR_MESSAGE);
 				this.dir = Main.defaultFolder;
+				
 			}
 	}
 	

@@ -7,18 +7,23 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
+import javax.swing.text.Document;
+
+import jdk.nashorn.internal.scripts.JS;
+
 import javax.swing.JScrollPane;
-
-
 
 public class ViewPanel extends JFrame  {
 	
 	private final Font Bold = new Font("Arial", Font.BOLD, 16);
 	private final Font Midl = new Font("Arial", Font.BOLD, 14);
+	private final Font Plan = new Font("Tahoma", Font.PLAIN, 15);
+	
 	
 	private JLabel labelSource = new JLabel("Choose source file");
 	private JLabel labelResult = new JLabel("Choose result file");
@@ -39,10 +44,13 @@ public class ViewPanel extends JFrame  {
 		
 	private JTextArea area_one = new JTextArea(100,20);
 	private JTextArea area_two = new JTextArea("There will be results file ");
-	
+	public static JTextArea area_sys = new JTextArea(0,40);
+		
 	public static StringBuffer SourceData = new StringBuffer();
 	public static StringBuffer ResultsData = new StringBuffer();
 
+	public int i;
+	
 	public ViewPanel(String str) {
 		super(str);
 		
@@ -59,14 +67,19 @@ public class ViewPanel extends JFrame  {
 			Box rightTopbox = Box.createHorizontalBox();
 			Box rightMiddlebox = Box.createHorizontalBox();
 			Box rightBottombox = Box.createHorizontalBox();
-			
+		
+		Box sysbox = Box.createVerticalBox();
+			Box sysTopBox = Box.createHorizontalBox();
+			Box sysMiddlebox = Box.createHorizontalBox();
+						
 		btnSourse.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				SourcePath = new Choosefile("Choose source file", ChooseSource, btnSourse, Sourcefield).getDir();
 				
-					new ParserDics(area_one, SourcePath, SourceData);
+					new ParserDics(area_one, SourcePath, SourceData);;
 					btnResult.setEnabled(true);
+					area_one.setVisible(true);
 			}
 		});	
 		
@@ -85,6 +98,7 @@ public class ViewPanel extends JFrame  {
 						if(a[i] != b[i])
 						{
 							new ParserDics(area_two, ResultPath, ResultsData);
+							area_two.setVisible(true);
 							break;
 						}
 					}
@@ -92,16 +106,37 @@ public class ViewPanel extends JFrame  {
 			}
 		});
 		
+		i = 0;
+		btnAnalize.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				
+					area_sys.append("test\n" + i++);
+					area_sys.setCaretPosition(area_sys.getDocument().getLength());			
+			}
+		});
+		
+		area_one.setFont(Plan);
 		area_one.setText("There will be source file");
+		area_one.setVisible(false);
+		
+		area_two.setFont(Plan);
 		area_two.setPreferredSize(area_one.getPreferredSize());	
-		area_two.setName("theResulttsFile");
+		area_two.setVisible(false);
+		
+		area_sys.setPreferredSize(area_one.getPreferredSize());
+		area_sys.setFont(Plan);
+		area_sys.setEditable(false);
+		area_sys.setForeground(Color.BLACK);
 
 		leftTopbox.add(labelSource).setFont(Bold);
 		leftMiddlebox.add(btnSourse).setFont(Bold);
 		leftMiddlebox.add(Sourcefield).setFont(Midl);
 		leftMiddlebox.add(Box.createHorizontalGlue());
-		
 		leftBottombox.add(new JScrollPane(area_one));
+		
 		
 			leftbox.add(leftTopbox);
 			leftbox.add(leftMiddlebox);
@@ -114,15 +149,26 @@ public class ViewPanel extends JFrame  {
 		rightMiddlebox.add(Resultfield).setFont(Midl);
 		rightBottombox.add(new JScrollPane(area_two));
 		
-		
 			rightbox.add(rightTopbox);
 			rightbox.add(rightMiddlebox);
 			rightbox.add(rightBottombox);
 			rightbox.add(btnSave).setFont(Bold);
 			rightbox.setBorder(new LineBorder(Color.BLACK));
+						
+		sysTopBox.add(new JLabel("Report")).setFont(Bold);
 			
+		JScrollPane scrollpane = new JScrollPane(area_sys);
+					scrollpane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+					scrollpane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		sysMiddlebox.add(scrollpane);	
+			
+			sysbox.add(sysTopBox);
+			sysbox.add(sysMiddlebox);
+			
+		
 		mainbox.add(leftbox);
 		mainbox.add(rightbox);
+		mainbox.add(sysbox);
 		setContentPane(mainbox);
 	}
 
