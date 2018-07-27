@@ -15,42 +15,42 @@ public class ParserDics {
 	private File file = null;
 	private FileReader reader = null;
 	private int CountStrings = 0;
+	private StringBuilder Data;
 	
-	public ParserDics(JTextArea area,  String src, StringBuffer buffer) {
+	public ParserDics(JTextArea area,  String src) {
 		
 		int ch;
-		buffer = new StringBuffer();
+		Data = new StringBuilder();
 		try{
 			file = new File(src);
 			reader = new FileReader(file);
 				while((ch = reader.read()) != -1)
 				{
-					buffer.append((char)ch);
+					Data.append((char)ch);
 					if(ch == '\n')
 						CountStrings++;
 				}
-			
+				if((char)ch != '\n')
+					Data.append('\n');
+				
 			area.setText("");
-			area.append(buffer.toString());
+			area.append(Data.toString());
 			
 			ViewPanel.area_sys.append("\n--------------------\n");
 			ViewPanel.area_sys.append("Open file: " + src);
 			ViewPanel.area_sys.append("\nStrings: " + Integer.toString(CountStrings));
-			ViewPanel.area_sys.append("\nSymbols: " + buffer.length());
+			ViewPanel.area_sys.append("\nSymbols: " + Data.length() + '\n');
 						
 		}catch(IOException e)
 		{
 			System.out.println(e.getMessage());
 		}
-		
-		
-	
-		
-		
 			
-		
-		
 	}
-
+	
+	public String getData() {
+			return Data.toString(); 
+	}
+		
 	
 }

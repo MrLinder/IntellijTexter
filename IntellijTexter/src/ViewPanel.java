@@ -43,11 +43,11 @@ public class ViewPanel extends JFrame  {
 	private JFileChooser ChooseResult = new JFileChooser(Main.defaultFolder);
 		
 	private JTextArea area_one = new JTextArea(100,20);
-	private JTextArea area_two = new JTextArea("There will be results file ");
+	public static JTextArea area_two = new JTextArea(100,20);
 	public static JTextArea area_sys = new JTextArea(0,40);
 		
-	public static StringBuffer SourceData = new StringBuffer();
-	public static StringBuffer ResultsData = new StringBuffer();
+	public static StringBuilder SourceData = new StringBuilder("null");
+	public static StringBuilder ResultsData = new StringBuilder();
 
 	public int i;
 	
@@ -75,11 +75,12 @@ public class ViewPanel extends JFrame  {
 		btnSourse.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SourcePath = new Choosefile("Choose source file", ChooseSource, btnSourse, Sourcefield).getDir();
 				
-					new ParserDics(area_one, SourcePath, SourceData);;
-					btnResult.setEnabled(true);
-					area_one.setVisible(true);
+				SourcePath = new Choosefile("Choose source file", ChooseSource, btnSourse, Sourcefield).getDir();
+				SourceData = new StringBuilder(new ParserDics(area_one, SourcePath).getData());	
+				
+				btnResult.setEnabled(true);
+				area_one.setVisible(true);
 			}
 		});	
 		
@@ -97,7 +98,7 @@ public class ViewPanel extends JFrame  {
 					{
 						if(a[i] != b[i])
 						{
-							new ParserDics(area_two, ResultPath, ResultsData);
+							ResultsData = new StringBuilder(new ParserDics(area_two, ResultPath).getData());
 							area_two.setVisible(true);
 							break;
 						}
@@ -106,15 +107,12 @@ public class ViewPanel extends JFrame  {
 			}
 		});
 		
-		i = 0;
+		
 		btnAnalize.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				
-					area_sys.append("test\n" + i++);
-					area_sys.setCaretPosition(area_sys.getDocument().getLength());			
+				new Analyzing();
+								
 			}
 		});
 		
@@ -123,10 +121,9 @@ public class ViewPanel extends JFrame  {
 		area_one.setVisible(false);
 		
 		area_two.setFont(Plan);
-		area_two.setPreferredSize(area_one.getPreferredSize());	
 		area_two.setVisible(false);
 		
-		area_sys.setPreferredSize(area_one.getPreferredSize());
+		area_sys.setCaretPosition(area_sys.getDocument().getLength());
 		area_sys.setFont(Plan);
 		area_sys.setEditable(false);
 		area_sys.setForeground(Color.BLACK);
@@ -136,7 +133,6 @@ public class ViewPanel extends JFrame  {
 		leftMiddlebox.add(Sourcefield).setFont(Midl);
 		leftMiddlebox.add(Box.createHorizontalGlue());
 		leftBottombox.add(new JScrollPane(area_one));
-		
 		
 			leftbox.add(leftTopbox);
 			leftbox.add(leftMiddlebox);
@@ -164,7 +160,6 @@ public class ViewPanel extends JFrame  {
 			
 			sysbox.add(sysTopBox);
 			sysbox.add(sysMiddlebox);
-			
 		
 		mainbox.add(leftbox);
 		mainbox.add(rightbox);
