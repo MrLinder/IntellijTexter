@@ -7,23 +7,18 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
-import javax.swing.text.Document;
-
-import jdk.nashorn.internal.scripts.JS;
-
 import javax.swing.JScrollPane;
 
-public class ViewPanel extends JFrame  {
-	
+public class ViewPanel extends JFrame{
+
+	private static final long serialVersionUID = 1L;
 	private final Font Bold = new Font("Arial", Font.BOLD, 16);
 	private final Font Midl = new Font("Arial", Font.BOLD, 14);
 	private final Font Plan = new Font("Tahoma", Font.PLAIN, 15);
-	
 	
 	private JLabel labelSource = new JLabel("Choose source file");
 	private JLabel labelResult = new JLabel("Choose result file");
@@ -112,9 +107,17 @@ public class ViewPanel extends JFrame  {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new Analyzing();
-								
 			}
 		});
+		
+		btnSave.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new SaveToFile(ResultsData, ResultPath);			
+			}
+		});
+		
 		
 		area_one.setFont(Plan);
 		area_one.setText("There will be source file");

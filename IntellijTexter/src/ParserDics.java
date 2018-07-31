@@ -1,12 +1,6 @@
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream; 
-import java.io.Reader;
-import java.util.Arrays;
 
 import javax.swing.JTextArea;
 
@@ -24,17 +18,27 @@ public class ParserDics {
 		try{
 			file = new File(src);
 			reader = new FileReader(file);
+				
+						//Data.append(Integer.toString(CountStrings) + "\t");
+				
 				while((ch = reader.read()) != -1)
 				{
 					Data.append((char)ch);
 					if(ch == '\n')
+					{
 						CountStrings++;
+						//Data.append(Integer.toString(CountStrings) + "\t");
+						
+					}
+						
 				}
-				if((char)ch != '\n')
+				if( (!Data.toString().trim().isEmpty()) && (char)ch != '\n')
 					Data.append('\n');
+										
 				
 			area.setText("");
 			area.append(Data.toString());
+			
 			
 			ViewPanel.area_sys.append("\n--------------------\n");
 			ViewPanel.area_sys.append("Open file: " + src);

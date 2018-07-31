@@ -1,7 +1,7 @@
 
 public class DataStack {
 
-	int idx;
+	int idx = 0;
 	String data;
 	
 	
@@ -20,7 +20,7 @@ public class DataStack {
 		} catch (Exception e) {
 			return null;
 		}
-		return s;
+		return s;		
 	}
 
 }

@@ -5,7 +5,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 public class Actions implements ActionListener{
-	public static JLabel label;
+	public JLabel label;
 	
 	public Actions(JLabel label) {
 		this.label = label;
