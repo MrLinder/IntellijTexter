@@ -2,49 +2,38 @@
 public class Analyzing {
 
 		DataStack Data = null;
-		String Result = null;
+		ResultData Result = null;
 		
 		public Analyzing()
 		{
 			Data = new DataStack(ViewPanel.SourceData);
-									
+			Result = new ResultData(ViewPanel.ResultsData);
+	
 			String d = new String();
-			String r = new String(ViewPanel.ResultsData.toString());
-			
-			
-			
-			
-			
 			do {
 					if(d != null){
 						d = Data.popSubString();
 						if(d == null)
 							break;
 					}
-															
-					if(r.trim().isEmpty())
+											
+					// TODO Доделать сортировку двух списков строк.
+					
+					// ---------проход посимвольно
+					String a = new String();
+						int i = 0;
+					do			//по подслову проходит индекксом 
 					{
-						r += d;																
-					}
-					
-					
-					int i = 0;
-					
-										
-					do
-					{
-						int j = 0;
+						//тут строго проходит слово посимвольно
 						
-							while(j < r.lastIndexOf('\n'))
-							{
-								System.out.print(r.charAt(j++));
-							}
-														
-							
+						a += d.charAt(i);
+						
+						System.out.println(a);
+					
+						
 					}while(++i < d.indexOf('='));			//по подслову проходит индекксом
-					
-					
-					
+					System.out.println();
+					//---------------------------
 					
 					
 			} while (d != null );		// 1 итерация выкидывает 1 строку референсарирррро
